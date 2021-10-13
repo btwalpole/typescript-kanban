@@ -9,6 +9,10 @@ type issue = {
 }
 */
 
+function handleChange() {
+    console.log('hi there')
+}
+
 let initialIssues: issue[] = [
     {
         status: "Backlog",
