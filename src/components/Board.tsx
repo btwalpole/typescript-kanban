@@ -2,23 +2,17 @@ import Issue from './Issue';
 import { issue } from '../models/issue.model'
 
 //import { useState } from 'react';
-/*
-type issue = {
-    status: "Backlog" | "In Progress" | "Done",
-    name: string
-}
-*/
 
-function handleChange() {
-    console.log('hi there')
-}
+
 
 let initialIssues: issue[] = [
     {
+        id: 1,
         status: "Backlog",
         name: "Cool Task 1"
     },
     {
+        id: 2,
         status: "Done",
         name: "Cool Task 2"
     }
@@ -27,9 +21,13 @@ let initialIssues: issue[] = [
 export default function Board() {
     //let [issues, setIssues] = useState(initialIssues)
 
+    function handleChange(id: number): void {
+        console.log('hi there ', id);
+    }
+
     return (
         <>
-        {initialIssues.map((item: issue) => <Issue {...item}/>)}
+        {initialIssues.map((item: issue) => <Issue key={item.id} handleChange={handleChange} issue={item}/>)}
         </>
     )
 }
