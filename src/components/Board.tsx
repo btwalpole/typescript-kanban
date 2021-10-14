@@ -1,9 +1,6 @@
 import Issue from './Issue';
 import { issue } from '../models/issue.model'
-
-//import { useState } from 'react';
-
-
+import { useState } from 'react';
 
 let initialIssues: issue[] = [
     {
@@ -19,15 +16,29 @@ let initialIssues: issue[] = [
 ]
 
 export default function Board() {
-    //let [issues, setIssues] = useState(initialIssues)
+    let [issues, setIssues] = useState(initialIssues)
 
-    function handleChange(id: number): void {
+    function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>, id: number): void {
         console.log('hi there ', id);
+        console.log('value', event.target.value);
+
+        setIssues(prevArray => prevArray.map(issue => {
+            return issue;
+            /*
+            if(issue.id === id) {
+                return {}
+            } else {
+                return issue
+            }
+            */
+        }))
+
+        const issueToUpdate = issues.find(issue => issue.id === id)
     }
 
     return (
         <>
-        {initialIssues.map((item: issue) => <Issue key={item.id} handleChange={handleChange} issue={item}/>)}
+        {issues.map((item: issue) => <Issue key={item.id} handleChange={handleChange} issue={item}/>)}
         </>
     )
 }

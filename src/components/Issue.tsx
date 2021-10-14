@@ -3,7 +3,7 @@ import { issue } from '../models/issue.model'
 
 type IssueProps = {
     issue: issue,
-    handleChange: (id: number) => void;
+    handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>, id: number) => void;
 }
 
 export default function Issue({issue, handleChange}: IssueProps) {
@@ -14,9 +14,9 @@ export default function Issue({issue, handleChange}: IssueProps) {
     <div>
         <h1>{name}</h1>
         <h2>Description</h2>
-        <textarea value={desc} onChange={(id: number) => handleChange}/>
+        <textarea value={desc} onChange={(event) => handleChange(event, id)}/>
         <h3>Status</h3>
-        <h2>{status}</h2>
+        <h2>{status} {id}</h2>
         <select>
             <option selected value="Backlog">Backlog</option>
             <option value="In Progress">In Progress</option>
