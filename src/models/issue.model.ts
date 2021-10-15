@@ -1,5 +1,6 @@
 export type issue = {
     id: number,
     status: "Backlog" | "In Progress" | "Done",
-    name: string
+    name: string,
+    desc: string
 }
