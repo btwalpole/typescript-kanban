@@ -1,5 +1,6 @@
 //import { useState } from 'react'
 import { issue } from '../models/issue.model'
+import '../App.css'
 
 type IssueProps = {
     issue: issue,
@@ -12,12 +13,11 @@ export default function Issue({issue, handleDescChange, handleStatusChange}: Iss
     const { id, name, status, desc } = issue;
 
     return (
-    <div>
+    <div className="issue">
         <h1>{name}</h1>
         <h2>Description</h2>
         <textarea value={desc} onChange={(event) => handleDescChange(event, id)}/>
         <h3>Status</h3>
-        <h2>{status} {id}</h2>
         <select value={status} onChange={(event) => handleStatusChange(event, id)}>
             <option value="Backlog">Backlog</option>
             <option value="In Progress">In Progress</option>

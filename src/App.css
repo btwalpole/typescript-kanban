@@ -17,3 +17,15 @@
   color: white;
   padding: 2em;
 }
+
+.column {
+  border: 2px solid brown;
+  display: flex;
+  flex-direction: column;
+}
+
+.issue {
+  border: 2px solid white;
+  padding: 1em;
+  margin: 1em;
+}

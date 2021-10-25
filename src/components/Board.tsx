@@ -1,18 +1,19 @@
 import Issue from './Issue';
 import { issue } from '../models/issue.model'
 import { useState } from 'react';
+import '../App.css'
 
 let initialIssues: issue[] = [
     {
         id: 1,
         status: "Backlog",
-        name: "Cool Task 1",
+        name: "Task 1",
         desc: 'Do some stuff'
     },
     {
         id: 2,
         status: "Done",
-        name: "Cool Task 2",
+        name: "Task 2",
         desc: 'Do some other stuff'
     }
 ]
@@ -50,16 +51,16 @@ export default function Board() {
 
 
     return (
-        <>
-        {issues.map((item: issue) => {
-            return (
-                <Issue 
-                    key={item.id} 
-                    handleDescChange={handleDescChange} 
-                    handleStatusChange={handleStatusChange} 
-                    issue={item}/>
-            )
-        })}
-        </>
+        <div className="column">
+            {issues.map((item: issue) => {
+                return (
+                    <Issue 
+                        key={item.id} 
+                        handleDescChange={handleDescChange} 
+                        handleStatusChange={handleStatusChange} 
+                        issue={item}/>
+                )
+            })}
+        </div>
     )
 }
