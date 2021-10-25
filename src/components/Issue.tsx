@@ -14,10 +14,10 @@ export default function Issue({issue, handleDescChange, handleStatusChange}: Iss
 
     return (
     <div className="issue">
-        <h1>{name}</h1>
-        <h2>Description</h2>
+        <h2>{name}</h2>
+        <h3>Description</h3>
         <textarea value={desc} onChange={(event) => handleDescChange(event, id)}/>
-        <h3>Status</h3>
+        <h4>Status</h4>
         <select value={status} onChange={(event) => handleStatusChange(event, id)}>
             <option value="Backlog">Backlog</option>
             <option value="In Progress">In Progress</option>

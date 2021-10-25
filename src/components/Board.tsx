@@ -13,8 +13,20 @@ let initialIssues: issue[] = [
     {
         id: 2,
         status: "Done",
-        name: "Task 2",
+        name: "Taskify",
         desc: 'Do some other stuff'
+    },
+    {
+        id: 3,
+        status: "In Progress",
+        name: "Thangy",
+        desc: 'Do some more other stuff'
+    },
+    {
+        id: 4,
+        status: "Done",
+        name: "Thingy",
+        desc: 'Do different other stuff'
     }
 ]
 
@@ -51,16 +63,49 @@ export default function Board() {
 
 
     return (
-        <div className="column">
-            {issues.map((item: issue) => {
-                return (
-                    <Issue 
-                        key={item.id} 
-                        handleDescChange={handleDescChange} 
-                        handleStatusChange={handleStatusChange} 
-                        issue={item}/>
-                )
-            })}
+        <div className="board-container">
+            <div className="column">
+                <h1>Backlog</h1>
+                {issues.map((item: issue) => {
+                    if(item.status === 'Backlog') {
+                        return (
+                            <Issue 
+                                key={item.id} 
+                                handleDescChange={handleDescChange} 
+                                handleStatusChange={handleStatusChange} 
+                                issue={item}/>
+                        )
+                    }
+                })}
+            </div>
+            <div className="column">
+                <h1>In Progress</h1>
+                {issues.map((item: issue) => {
+                    if(item.status === 'In Progress') {
+                        return (
+                            <Issue 
+                                key={item.id} 
+                                handleDescChange={handleDescChange} 
+                                handleStatusChange={handleStatusChange} 
+                                issue={item}/>
+                        )
+                    }
+                })}
+            </div>
+            <div className="column">
+                <h1>Done</h1>
+                {issues.map((item: issue) => {
+                    if(item.status === 'Done') {
+                        return (
+                            <Issue 
+                                key={item.id} 
+                                handleDescChange={handleDescChange} 
+                                handleStatusChange={handleStatusChange} 
+                                issue={item}/>
+                        )
+                    }
+                })}
+            </div>
         </div>
     )
 }

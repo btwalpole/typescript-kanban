@@ -18,6 +18,11 @@
   padding: 2em;
 }
 
+.board-container {
+  display: flex;
+  border: 2px solid green;
+}
+
 .column {
   border: 2px solid brown;
   display: flex;
