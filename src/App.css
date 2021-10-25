@@ -33,4 +33,18 @@
   border: 2px solid white;
   padding: 1em;
   margin: 1em;
+  cursor: pointer;
+}
+
+.issue-modal {
+  position: fixed;
+  max-width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid orange;;
+  border-radius: 5px;
+  background-color: black;
+  text-align: center;
+  z-index: 99;
 }

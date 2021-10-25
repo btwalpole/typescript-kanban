@@ -32,6 +32,16 @@ let initialIssues: issue[] = [
 
 export default function Board() {
     let [issues, setIssues] = useState(initialIssues)
+    const [modalActive, setModalActive] = useState(false)
+
+    //each issue has an onclick => setModalActive IssueModal
+    //which is passed the id of the issue
+
+    function toggleModal(event: React.MouseEvent, id: number) {
+        event.preventDefault();
+        console.log('toggling modal ', id);
+        setModalActive(true);
+    }
 
     function handleDescChange(event: React.ChangeEvent<HTMLTextAreaElement>, id: number): void {
         console.log('hi there ', id);
@@ -73,7 +83,9 @@ export default function Board() {
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
-                                issue={item}/>
+                                issue={item}
+                                toggleModal={toggleModal}  
+                            />
                         )
                     }
                 })}
@@ -87,7 +99,10 @@ export default function Board() {
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
-                                issue={item}/>
+                                issue={item}
+                                toggleModal={toggleModal}  
+    
+                            />
                         )
                     }
                 })}
@@ -101,7 +116,10 @@ export default function Board() {
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
-                                issue={item}/>
+                                issue={item}
+                                toggleModal={toggleModal}  
+ 
+                            />
                         )
                     }
                 })}
