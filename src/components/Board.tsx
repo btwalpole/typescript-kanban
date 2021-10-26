@@ -1,7 +1,7 @@
 import Issue from './Issue';
 import IssueModal from './IssueModal'
 import { issue } from '../models/issue.model'
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '../App.css'
 
 let initialIssues: issue[] = [
@@ -34,9 +34,24 @@ let initialIssues: issue[] = [
 export default function Board() {
     let [issues, setIssues] = useState(initialIssues)
     const [modalActive, setModalActive] = useState(0)
+    const ref = useRef<HTMLDivElement>(null)
 
-    //each issue has an onclick => setModalActive IssueModal
-    //which is passed the id of the issue
+    useEffect(() => {
+        const checkIfClickedOutside = (e: React.MouseEvent) => {
+          // If the menu is open and the clicked target is not within the menu,
+          // then close the menu
+          if (modalActive > 0 && ref.current && !ref.current.contains(e.target as Node)) {
+            setModalActive(0)
+          }
+        }
+    
+        document.addEventListener("mousedown", checkIfClickedOutside)
+    
+        return () => {
+          // Cleanup the event listener
+          document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+      }, [modalActive])
 
     function toggleModal(event: React.MouseEvent, id: number) {
         event.preventDefault();
@@ -75,7 +90,7 @@ export default function Board() {
 
     return (
         <div className="board-container">
-            <div className="issue-modal">
+            <div ref={ref} className="issue-modal">
                 {modalActive > 0 && (
                     issues.map((item: issue) => {
                         if(item.id === modalActive) {
