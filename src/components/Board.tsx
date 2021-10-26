@@ -1,4 +1,5 @@
 import Issue from './Issue';
+import IssueModal from './IssueModal'
 import { issue } from '../models/issue.model'
 import { useState } from 'react';
 import '../App.css'
@@ -32,7 +33,7 @@ let initialIssues: issue[] = [
 
 export default function Board() {
     let [issues, setIssues] = useState(initialIssues)
-    const [modalActive, setModalActive] = useState(false)
+    const [modalActive, setModalActive] = useState(0)
 
     //each issue has an onclick => setModalActive IssueModal
     //which is passed the id of the issue
@@ -40,7 +41,7 @@ export default function Board() {
     function toggleModal(event: React.MouseEvent, id: number) {
         event.preventDefault();
         console.log('toggling modal ', id);
-        setModalActive(true);
+        setModalActive(id);
     }
 
     function handleDescChange(event: React.ChangeEvent<HTMLTextAreaElement>, id: number): void {
@@ -74,6 +75,23 @@ export default function Board() {
 
     return (
         <div className="board-container">
+            <div className="issue-modal">
+                {modalActive > 0 && (
+                    issues.map((item: issue) => {
+                        if(item.id === modalActive) {
+                            return (
+                                <Issue 
+                                    key={item.id} 
+                                    handleDescChange={handleDescChange} 
+                                    handleStatusChange={handleStatusChange} 
+                                    issue={item}
+                                    toggleModal={toggleModal}  
+                                />
+                            )
+                        }
+                    })
+                )}
+            </div>
             <div className="column">
                 <h1>Backlog</h1>
                 {issues.map((item: issue) => {

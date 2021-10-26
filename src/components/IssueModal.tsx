@@ -13,7 +13,7 @@ export default function Issue({issue, handleDescChange, handleStatusChange}: Iss
     const { id, name, status, desc } = issue;
 
     return (
-    <div className="issue-modal">
+    <div className="issue">
         <h2>{name}</h2>
         <h3>Description</h3>
         <textarea value={desc} onChange={(event) => handleDescChange(event, id)}/>
