@@ -36,7 +36,12 @@ export default function Board() {
     const [modalActive, setModalActive] = useState(0)
     const ref = useRef<HTMLDivElement>(null)
 
+    function logMouseEvent() {
+        console.log('mouseDown event detected')
+    }
+
     useEffect(() => {
+        console.log(ref.current)
         const checkIfClickedOutside = (e: React.MouseEvent) => {
           // If the menu is open and the clicked target is not within the menu,
           // then close the menu
@@ -48,6 +53,8 @@ export default function Board() {
         }
     
         document.addEventListener("onMouseDown", (e) => checkIfClickedOutside)
+        document.addEventListener("onMouseDown", logMouseEvent)
+
     
         return () => {
           // Cleanup the event listener
