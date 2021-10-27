@@ -41,17 +41,19 @@ export default function Board() {
           // If the menu is open and the clicked target is not within the menu,
           // then close the menu
           if (modalActive > 0 && ref.current && !ref.current.contains(e.target as Node)) {
-            setModalActive(0)
+            setModalActive(0);
+            console.log('clicked outside of modal, now closing')
           }
+          console.log('click registered as inside modal')
         }
     
-        document.addEventListener("mousedown", checkIfClickedOutside)
+        document.addEventListener("onMouseDown", (e) => checkIfClickedOutside)
     
         return () => {
           // Cleanup the event listener
-          document.removeEventListener("mousedown", checkIfClickedOutside)
+          document.removeEventListener("onMouseDown", (e) => checkIfClickedOutside)
         }
-      }, [modalActive])
+      })
 
     function toggleModal(event: React.MouseEvent, id: number) {
         event.preventDefault();
@@ -90,6 +92,7 @@ export default function Board() {
 
     return (
         <div className="board-container">
+            <h1>Modal Active: {modalActive}</h1>
             <div ref={ref} className="issue-modal">
                 {modalActive > 0 && (
                     issues.map((item: issue) => {
