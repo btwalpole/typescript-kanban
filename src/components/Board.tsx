@@ -42,7 +42,7 @@ export default function Board() {
 
     useEffect(() => {
         console.log(ref.current)
-        const checkIfClickedOutside: {(event: React.MouseEvent<Element, MouseEvent>): void} = (event: React.MouseEvent<Element, MouseEvent>) => {
+        const checkIfClickedOutside: {(event: MouseEvent): void} = (event: MouseEvent) => {
           // If the menu is open and the clicked target is not within the menu,
           // then close the menu
           if (modalActive > 0 && ref.current && !ref.current.contains(event.target as Node)) {
@@ -52,7 +52,7 @@ export default function Board() {
           console.log('click registered as inside modal')
         }
     
-        document.addEventListener("mousedown", (ev: React.MouseEvent) => checkIfClickedOutside(ev))
+        document.addEventListener("mousedown", (event: MouseEvent) => checkIfClickedOutside(event))
         document.addEventListener("mousedown", logMouseEvent)
     
         return () => {
