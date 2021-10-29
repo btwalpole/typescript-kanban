@@ -1,5 +1,5 @@
-import Issue from './Issue';
 import IssueModal from './IssueModal'
+import IssueCard from './IssueCard';
 import { issue } from '../models/issue.model'
 import { useState, useRef, useEffect } from 'react';
 import '../App.css'
@@ -98,13 +98,12 @@ export default function Board() {
 
     return (
         <div className="board-container">
-            <h1>Modal Active: {modalActive}</h1>
             <div ref={ref} className="issue-modal">
                 {modalActive > 0 && (
                     issues.map((item: issue) => {
                         if(item.id === modalActive) {
                             return (
-                                <Issue 
+                                <IssueModal 
                                     key={item.id} 
                                     handleDescChange={handleDescChange} 
                                     handleStatusChange={handleStatusChange} 
@@ -116,12 +115,13 @@ export default function Board() {
                     })
                 )}
             </div>
+            {(modalActive > 0) ? <div className="modal-bg"></div> : null}
             <div className="column">
                 <h1>Backlog</h1>
                 {issues.map((item: issue) => {
                     if(item.status === 'Backlog') {
                         return (
-                            <Issue 
+                            <IssueCard
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
@@ -137,7 +137,7 @@ export default function Board() {
                 {issues.map((item: issue) => {
                     if(item.status === 'In Progress') {
                         return (
-                            <Issue 
+                            <IssueCard
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
@@ -154,13 +154,12 @@ export default function Board() {
                 {issues.map((item: issue) => {
                     if(item.status === 'Done') {
                         return (
-                            <Issue 
+                            <IssueCard
                                 key={item.id} 
                                 handleDescChange={handleDescChange} 
                                 handleStatusChange={handleStatusChange} 
                                 issue={item}
                                 toggleModal={toggleModal}  
- 
                             />
                         )
                     }

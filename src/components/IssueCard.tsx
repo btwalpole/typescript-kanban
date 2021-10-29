@@ -2,18 +2,18 @@
 import { issue } from '../models/issue.model'
 import '../App.css'
 
-type IssueProps = {
+type IssueCardProps = {
     issue: issue,
     handleDescChange: (event: React.ChangeEvent<HTMLTextAreaElement>, id: number) => void;
     handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>, id: number) => void;
     toggleModal: (event: React.MouseEvent, id: number) => void;
 }
 
-export default function Issue({issue, handleDescChange, handleStatusChange, toggleModal}: IssueProps) {
+export default function IssueCard({issue, handleDescChange, handleStatusChange, toggleModal}: IssueCardProps) {
     const { id, name, status, desc } = issue;
 
     return (
-    <div className="issue" onClick={(event) => toggleModal(event, id)}>
+    <div className="issue-card" onClick={(event) => toggleModal(event, id)}>
         <h2>{name}</h2>
         <h3>Description</h3>
         <textarea value={desc} onChange={(event) => handleDescChange(event, id)}/>
