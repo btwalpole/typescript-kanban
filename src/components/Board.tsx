@@ -108,7 +108,6 @@ export default function Board() {
                                     handleDescChange={handleDescChange} 
                                     handleStatusChange={handleStatusChange} 
                                     issue={item}
-                                    toggleModal={toggleModal}  
                                 />
                             )
                         }

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,12 +9,13 @@
 }
 
 .container {
-  background-color: #575c64;
+  width: 80%;
+  background-color: #dddddd;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(59, 59, 59);
   padding: 2em;
 }
 

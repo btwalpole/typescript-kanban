@@ -6,7 +6,6 @@ type IssueModalProps = {
     issue: issue,
     handleDescChange: (event: React.ChangeEvent<HTMLTextAreaElement>, id: number) => void;
     handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>, id: number) => void;
-
 }
 
 export default function Issue({issue, handleDescChange, handleStatusChange}: IssueModalProps) {
