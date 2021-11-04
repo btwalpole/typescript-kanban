@@ -10,7 +10,7 @@
 
 .container {
   width: 80%;
-  background-color: #dddddd;
+  background-color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -22,19 +22,41 @@
 .board-container {
   display: flex;
   border: 2px solid green;
+  justify-content: center;
+  align-items: stretch;
+  border-radius: 5px;
 }
 
 .column {
-  border: 2px solid brown;
+  border-radius: 5px;
+  background-color: #c7c7c7;
   display: flex;
   flex-direction: column;
+  margin: 1em;
+  width: 300px;
+}
+
+.column h1 {
+  font-size: 1.2em;
+  display: flex;
+  align-self: flex-start;
+  margin-left: .5em;
+}
+
+.column h2 {
+  font-size: .8em;
+  display: flex;
+  align-self: flex-start;
+  margin-left: .5em;
+
 }
 
 .issue-card {
-  border: 2px solid white;
-  padding: 1em;
-  margin: 1em;
+  background-color: white;
+  padding: .1em;
+  margin: .2em;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .issue-modal {
