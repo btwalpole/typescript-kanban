@@ -2,6 +2,7 @@ import IssueModal from './IssueModal'
 import IssueCard from './IssueCard';
 import { issue } from '../models/issue.model'
 import { useState, useRef, useEffect } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import '../App.css'
 
 let initialIssues: issue[] = [
@@ -95,75 +96,86 @@ export default function Board() {
         }));
     }
 
+    interface DragEvent<T = Element> extends React.MouseEvent<T, React.NativeDragEvent> {
+        dataTransfer: DataTransfer;
+    }
+
+    function onDragEnd: void = result: any => {
+        //TODO: reorder our column
+    }
+
 
     return (
-        <div className="board-container">
-            <div ref={ref} className="issue-modal">
-                {modalActive > 0 && (
-                    issues.map((item: issue) => {
-                        if(item.id === modalActive) {
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div className="board-container">
+                <div ref={ref} className="issue-modal">
+                    {modalActive > 0 && (
+                        issues.map((item: issue) => {
+                            if(item.id === modalActive) {
+                                return (
+                                    <IssueModal 
+                                        key={item.id} 
+                                        handleDescChange={handleDescChange} 
+                                        handleStatusChange={handleStatusChange} 
+                                        issue={item}
+                                    />
+                                )
+                            }
+                        })
+                    )}
+                </div>
+                {(modalActive > 0) ? <div className="modal-bg"></div> : null}
+                <div className="column">
+                    <h1>Backlog</h1>
+                    {issues.map((item: issue) => {
+                        if(item.status === 'Backlog') {
                             return (
-                                <IssueModal 
+                                <IssueCard
                                     key={item.id} 
                                     handleDescChange={handleDescChange} 
                                     handleStatusChange={handleStatusChange} 
                                     issue={item}
+                                    toggleModal={toggleModal}  
                                 />
                             )
                         }
-                    })
-                )}
+                    })}
+                </div>
+                <div className="column">
+                    <h1>In Progress</h1>
+                    {issues.map((item: issue) => {
+                        if(item.status === 'In Progress') {
+                            return (
+                                <IssueCard
+                                    key={item.id} 
+                                    handleDescChange={handleDescChange} 
+                                    handleStatusChange={handleStatusChange} 
+                                    issue={item}
+                                    toggleModal={toggleModal}  
+        
+                                />
+                            )
+                        }
+                    })}
+                </div>
+                <div className="column">
+                    <h1>Done</h1>
+                    {issues.map((item: issue) => {
+                        if(item.status === 'Done') {
+                            return (
+                                <IssueCard
+                                    key={item.id} 
+                                    handleDescChange={handleDescChange} 
+                                    handleStatusChange={handleStatusChange} 
+                                    issue={item}
+                                    toggleModal={toggleModal}  
+                                />
+                            )
+                        }
+                    })}
+                </div>
             </div>
-            {(modalActive > 0) ? <div className="modal-bg"></div> : null}
-            <div className="column">
-                <h1>Backlog</h1>
-                {issues.map((item: issue) => {
-                    if(item.status === 'Backlog') {
-                        return (
-                            <IssueCard
-                                key={item.id} 
-                                handleDescChange={handleDescChange} 
-                                handleStatusChange={handleStatusChange} 
-                                issue={item}
-                                toggleModal={toggleModal}  
-                            />
-                        )
-                    }
-                })}
-            </div>
-            <div className="column">
-                <h1>In Progress</h1>
-                {issues.map((item: issue) => {
-                    if(item.status === 'In Progress') {
-                        return (
-                            <IssueCard
-                                key={item.id} 
-                                handleDescChange={handleDescChange} 
-                                handleStatusChange={handleStatusChange} 
-                                issue={item}
-                                toggleModal={toggleModal}  
-    
-                            />
-                        )
-                    }
-                })}
-            </div>
-            <div className="column">
-                <h1>Done</h1>
-                {issues.map((item: issue) => {
-                    if(item.status === 'Done') {
-                        return (
-                            <IssueCard
-                                key={item.id} 
-                                handleDescChange={handleDescChange} 
-                                handleStatusChange={handleStatusChange} 
-                                issue={item}
-                                toggleModal={toggleModal}  
-                            />
-                        )
-                    }
-                })}
-            </div>
-        </div>
+        </DragDropContext>
+        
     )
 }
